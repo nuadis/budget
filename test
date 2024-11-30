@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .budget-item {
+            margin-bottom: 10px;
+        }
+        .budget-item label {
+            margin-right: 10px;
+        }
+        .total {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Budget Tracker</h1>
+    <div id="budget-container">
+        <div class="budget-item">
+            <label for="income">Monthly Income ($):</label>
+            <input type="number" id="income" placeholder="Enter your income">
+        </div>
+        <div class="budget-item">
+            <label for="expenses">Monthly Expenses ($):</label>
+            <input type="number" id="expenses" placeholder="Enter your expenses">
+        </div>
+        <button onclick="calculateBudget()">Calculate Budget</button>
+        <div id="result" class="total"></div>
+    </div>
+
+    <script>
+        function calculateBudget() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            const remaining = income - expenses;
+            const resultDiv = document.getElementById('result');
+            
+            if (remaining >= 0) {
+                resultDiv.textContent = `You are saving $${remaining} per month.`;
+                resultDiv.style.color = 'green';
+            } else {
+                resultDiv.textContent = `You are overspending by $${Math.abs(remaining)} per month.`;
+                resultDiv.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>
